@@ -109,17 +109,15 @@ export async function generatePDF(
 
   let y = 108 + (doc.doc_type === "invoice" ? 28 : 0);
 
-  // Bill To + VAT No bands
-  const halfW = (W - M * 2 - 8) / 2;
-  drawNavyBar(pdf, M, y, halfW, 16, "Bill To:");
-  drawNavyBar(pdf, M + halfW + 8, y, halfW, 16, "VAT No:");
+  // Bill To band
+  const fullW = W - M * 2;
+  drawNavyBar(pdf, M, y, fullW, 16, "Bill To:");
 
   y += 16;
   const boxH = 52;
   pdf.setDrawColor(180);
   pdf.setLineWidth(0.5);
-  pdf.rect(M, y, halfW, boxH);
-  pdf.rect(M + halfW + 8, y, halfW, boxH);
+  pdf.rect(M, y, fullW, boxH);
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(9);
@@ -128,7 +126,7 @@ export async function generatePDF(
   pdf.text(doc.customer_name || "—", M + 6, by);
   by += 11;
   if (doc.customer_address) {
-    const lines = pdf.splitTextToSize(doc.customer_address, halfW - 12);
+    const lines = pdf.splitTextToSize(doc.customer_address, fullW - 12);
     pdf.text(lines, M + 6, by);
   }
   if (doc.customer_email) {
@@ -136,11 +134,6 @@ export async function generatePDF(
     pdf.setTextColor(...MUTED);
     pdf.text(doc.customer_email, M + 6, y + boxH - 8);
   }
-
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(9);
-  pdf.setTextColor(...INK);
-  pdf.text(COMPANY.vatNumber, M + halfW + 14, y + 20);
 
   y += boxH + 10;
 

@@ -18,7 +18,7 @@ export function InvoiceForm() {
     customer_address: "",
     project_description: "",
     notes: "",
-    tax_rate: 15,
+    tax_rate: 0,
     doc_date: new Date().toISOString().slice(0, 10),
     due_date: defaultDueDate(),
     items: [emptyLineItem()],

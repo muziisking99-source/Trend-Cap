@@ -15,7 +15,7 @@ export function QuoteForm() {
     customer_address: "",
     project_description: "",
     notes: "",
-    tax_rate: 15,
+    tax_rate: 0,
     status: "draft",
     doc_date: new Date().toISOString().slice(0, 10),
     items: [emptyLineItem()],

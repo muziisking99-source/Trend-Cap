@@ -20,8 +20,7 @@ interface Props {
 
 export function LineItemGrid({ items, taxRate, onItemsChange, onTaxRateChange }: Props) {
   const subtotal = items.reduce((s, i) => s + i.quantity * i.unit_price, 0);
-  const tax = subtotal * (taxRate / 100);
-  const total = subtotal + tax;
+  const total = subtotal;
 
   function updateItem(idx: number, patch: Partial<FormLineItem>) {
     const next = [...items];
@@ -134,23 +133,11 @@ export function LineItemGrid({ items, taxRate, onItemsChange, onTaxRateChange }:
         ))}
       </div>
 
-      <div className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-        <div>
-          <label className="text-xs text-muted-navy">Tax rate (%)</label>
-          <NumberField
-            value={taxRate}
-            onValueChange={onTaxRateChange}
-            className="mt-1 w-32 input-field"
-          />
-        </div>
+      <div className="mt-6 flex flex-col md:flex-row md:items-end md:justify-end gap-4">
         <div className="w-full md:w-64 space-y-1 text-sm">
           <div className="flex justify-between text-muted-navy">
             <span>Subtotal</span>
             <span>{money(subtotal)}</span>
-          </div>
-          <div className="flex justify-between text-muted-navy">
-            <span>Tax</span>
-            <span>{money(tax)}</span>
           </div>
           <div className="flex justify-between font-serif text-lg text-ink border-t border-border pt-2 font-mono">
             <span>Total</span>
