@@ -415,7 +415,6 @@ export function DocumentDetail({ id, type, listRoute, listLabel, actions }: Prop
             <div className="border-t border-border p-4 flex justify-end">
               <div className="w-full max-w-xs space-y-1 text-sm">
                 <div className="flex justify-between text-muted-navy"><span>Subtotal</span><span>{money(doc.subtotal)}</span></div>
-                <div className="flex justify-between text-muted-navy"><span>Tax ({doc.tax_rate}%)</span><span>{money(doc.tax_amount)}</span></div>
                 <div className="flex justify-between border-t border-border pt-2 font-serif text-lg text-ink font-mono"><span>Total</span><span>{money(doc.total)}</span></div>
               </div>
             </div>
